@@ -1,9 +1,8 @@
-import { readFileSync } from 'node:fs'
 import { getUserInfo, registerNewUser, registerScoreUserId } from '../db'
 import { runUserServer } from './user-server'
+import { IConfig } from '../types'
 
-// TODO: Add config schema parsing and typing
-const startUserServer =  (config: Record<string, string>)=>
+const startUserServer = (config: IConfig) =>
   runUserServer({
     getUserInfoFromUniqueId: getUserInfo,
     createNewUser: registerNewUser,
@@ -17,5 +16,3 @@ const startUserServer =  (config: Record<string, string>)=>
   })
 
 export default startUserServer
-
-

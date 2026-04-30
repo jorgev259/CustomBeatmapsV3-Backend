@@ -336,6 +336,18 @@ const registerScoreUsername = (beatmapKey : string, username : string, score : I
     .then(() => tryRegisterScore(lowscores, beatmapKey, username, score, (score, record) => score.score < record.score))
 }
 
+ export async function onAcceptBeatmap(
+   attachmentName: string,
+   beatmapURL: string
+ ) {
+   let filename = basename(new URL(beatmapURL).pathname)
+
+   await downloadBeatmapPackage(beatmapURL, filename)
+   console.log('Downloaded: ', filename)
+   deleteSubmission(attachmentName)
+   console.log('Deleted: ', filename)
+ }
+
 /**
  * Registers a user score
  * 
