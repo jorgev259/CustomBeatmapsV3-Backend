@@ -23,6 +23,7 @@ export interface IScoreSubmission {
 export interface IConfig {
   clientId: string
   guildId: string
+  botToken: string
   'bot-status': string
   'bot-status-type': ActivityType
   'bot-status-url': string

@@ -1,8 +1,8 @@
-import { runClient } from './discord/client'
 import { readFileSync } from 'fs'
 
-import startUserServer from './web'
 import { IConfig } from './types'
+import { runUserServer } from './web/user-server'
+import { runClient } from './discord/client'
 
 const config = JSON.parse(readFileSync('config.json', 'utf8')) as IConfig
 
@@ -21,4 +21,4 @@ exec(`http-server db/public --port ${config["public-data-server-port"]}`, (error
 
 // Discord client
 runClient(config)
-startUserServer(config)
+runUserServer(config)
