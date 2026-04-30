@@ -4,3 +4,4 @@ beatmaps
 db
 bot-secret.txt
 *.log
+.vscode
