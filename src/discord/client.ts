@@ -16,7 +16,6 @@ export const runClient = (config: IConfig): Promise<void> => {
     ]
   })
 
-  const token = readFileSync('bot-secret.txt', 'utf8')
 
   client.on('messageCreate', (message) => {
     messageCreate(message, client, config)
@@ -27,7 +26,7 @@ export const runClient = (config: IConfig): Promise<void> => {
     interactionCreate(interaction, client, config)
   })
 
-  return client.login(token).then(() => {
+  return client.login(config.botToken).then(() => {
     console.log('Discord Client Logged in!')
     logger.info('Discord Client Logged in!')
     client.user?.setPresence({

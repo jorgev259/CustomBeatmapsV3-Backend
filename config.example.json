@@ -1,6 +1,7 @@
 {
     "clientId": "949053716919627806",
     "guildId": "867587901101178910",
+    "botToken": "abcdefghijklmnopq",
     "bot-status": "Your epic beats",
     "bot-status-type": "LISTENING",
     "bot-status-url": "http://64.225.60.116:8080/",

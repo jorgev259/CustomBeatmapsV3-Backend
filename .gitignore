@@ -5,3 +5,4 @@ db
 bot-secret.txt
 *.log
 .vscode
+config.json
