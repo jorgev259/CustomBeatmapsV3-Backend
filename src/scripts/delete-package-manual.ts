@@ -1,4 +1,4 @@
-import { deletePackage } from './db'
+import { deletePackage } from '../db'
 
 const args = process.argv.slice(2);
 

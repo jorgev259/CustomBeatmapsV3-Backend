@@ -1,9 +1,9 @@
 import { Client, Message, TextChannel, GuildMember, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, APIActionRowComponent, APIMessageActionRowComponent, APITextInputComponent, Attachment } from 'discord.js'
 import { readFileSync } from "fs";
 
-import { IBeatmapSubmission } from './data'
+import { IBeatmapSubmission } from '../types'
 
-import { logger } from './publiclogger'
+import { logger } from '../publiclogger'
 
 interface IRunClientArguments {
     onAcceptBeatmap : (attachmentName : string, beatmapURL : string, onComplete : () => void) => void;

@@ -10,7 +10,7 @@ import StreamZip = require('node-stream-zip')
 import { logger } from './publiclogger'
 
 
-import { IBeatmapSubmission, IUserInfo } from './data'
+import { IBeatmapSubmission, IUserInfo } from './types'
 
 // Setup our folder structure
 if (!existsSync('db'))

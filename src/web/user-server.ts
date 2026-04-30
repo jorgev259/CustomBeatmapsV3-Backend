@@ -1,16 +1,8 @@
 import express from 'express'
 import Filter from 'bad-words'
-import { IUserInfo } from './data'
+import { IScoreSubmission, IUserInfo } from '../types'
 
-import { logger } from './publiclogger'
-
-export interface IScoreSubmission {
-    uniqueUserId : string
-    beatmapKey : string
-    score : number
-    accuracy : number
-    fc : number
-}
+import { logger } from '../publiclogger'
 
 const badWordFilter = new Filter()
 

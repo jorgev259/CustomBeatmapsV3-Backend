@@ -1,11 +1,13 @@
-import { runClient } from "./client";
-import { readFileSync } from "fs";
-import { basename } from 'path';
-import { exec } from 'child_process'
+import { runClient } from './discord/client'
+import { readFileSync } from 'fs'
+import { basename } from 'path'
 
-import { downloadBeatmapPackage, registerSubmission, deleteSubmission, registerZipPackage, getUserInfo, registerNewUser, registerScoreUserId } from "./db";
-import { runUserServer } from "./user-server";
-import { logger } from './publiclogger'
+import {
+  downloadBeatmapPackage,
+  registerSubmission,
+  deleteSubmission
+} from './db'
+import startUserServer from './web'
 
 const config = JSON.parse(readFileSync('config.json', 'utf8'))
 
@@ -24,25 +26,19 @@ exec(`http-server db/public --port ${config["public-data-server-port"]}`, (error
 
 // Discord client
 runClient({
-    onAcceptBeatmap : (attachmentName, beatmapURL, onComplete) => {
-        let filename = basename(new URL(beatmapURL).pathname)
+  onAcceptBeatmap: (attachmentName, beatmapURL, onComplete) => {
+    let filename = basename(new URL(beatmapURL).pathname)
 
-        downloadBeatmapPackage(beatmapURL, filename).then(() => {
-            console.log("Downloaded: ", filename)
-            deleteSubmission(attachmentName)
-            console.log("Deleted: ", filename)
-            onComplete()
-        })
-    },
-    onPostSubmission : registerSubmission,
-    onRejectSubmission : deleteSubmission,
-    config
-}).then(() => {
-    // Node server
-    return runUserServer({
-        getUserInfoFromUniqueId: getUserInfo,
-        createNewUser: registerNewUser,
-        postHighScore : submission => registerScoreUserId(submission.beatmapKey, submission.uniqueUserId, {score: submission.score, accuracy: submission.accuracy, fc: submission.fc}),
-        config: config
+    downloadBeatmapPackage(beatmapURL, filename).then(() => {
+      console.log('Downloaded: ', filename)
+      deleteSubmission(attachmentName)
+      console.log('Deleted: ', filename)
+      onComplete()
     })
+  },
+  onPostSubmission: registerSubmission,
+  onRejectSubmission: deleteSubmission,
+  config
 })
+
+startUserServer(config)

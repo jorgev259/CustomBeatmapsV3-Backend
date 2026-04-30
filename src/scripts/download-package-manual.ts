@@ -1,4 +1,4 @@
-import { downloadBeatmapPackage } from './db'
+import { downloadBeatmapPackage } from '../db'
 
 const args = process.argv.slice(2);
 
